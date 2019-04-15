@@ -7,6 +7,7 @@ const person = props => {
         I'am {props.name} and i'am {props.age}
       </p>
       <p>{props.children}</p>
+      <input type="text" onChange={props.changed} value={props.name} />
     </div>
   );
 };

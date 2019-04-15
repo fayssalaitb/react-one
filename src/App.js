@@ -12,13 +12,22 @@ class App extends Component {
     otherState: "some value"
   };
 
-  switchNameHandler = () => {
+  switchNameHandler = newName => {
     //console.log('was clicked');
     // DONT DO THIS this.state.state.persons[0].name = "Laxx";
     this.setState({
       persons: [
-        { name: "Laxx", age: 24 },
+        { name: newName, age: 24 },
         { name: "Manu", age: 65 },
+        { name: "Degg", age: 26 }
+      ]
+    });
+  };
+  nameCangedHandler = event => {
+    this.setState({
+      persons: [
+        { name: "Manu", age: 24 },
+        { name: event.target.value, age: 65 },
         { name: "Degg", age: 26 }
       ]
     });
@@ -28,13 +37,17 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hi its React</h1>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <button onClick={this.switchNameHandler.bind(this, "fayssal")}>
+          Switch Name
+        </button>
+
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
         />
         <Person
-          click={this.switchNameHandler}
+          click={this.switchNameHandler.bind(this, "tomtom")}
+          changed={this.nameCangedHandler}
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
         >
