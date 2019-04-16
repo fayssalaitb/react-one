@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import Person from "./Person/Person";
-import Radium, { StyleRoot } from "radium";
 
 class App extends Component {
   // the DAta i'am working with
@@ -52,8 +51,7 @@ class App extends Component {
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer",
-      ":hover": { backgroundColor: "lightgreen", color: "black" }
+      cursor: "pointer"
     };
     // condition to check if we want to show or hide the person list
     let persons = null;
@@ -74,22 +72,19 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = "red";
-      style[":hover"] = { backgroundColor: "salmon", color: "black" };
     }
     //what we return to the Dom after all the logic
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi its React</h1>
-          <button style={style} onClick={this.togglePersonsHandler}>
-            {" "}
-            Toggle Persons
-          </button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hi its React</h1>
+        <button style={style} onClick={this.togglePersonsHandler}>
+          {" "}
+          Toggle Persons
+        </button>
+        {persons}
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
