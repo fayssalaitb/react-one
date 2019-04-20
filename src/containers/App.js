@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import Person from "./Person/Person";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
+//import { prependOnceListener } from "cluster";
 
 class App extends Component {
   // the DAta i'am working with
@@ -44,43 +46,28 @@ class App extends Component {
   };
   // rendering everything
   render() {
-    //some CSS styles
-    const style = {
-      backgroundColor: "green",
-      color: "white",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer"
-    };
     // condition to check if we want to show or hide the person list
     let persons = null;
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person
-                click={() => this.deletePersonhandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={event => this.nameChangedHandler(event, person.id)}
-              />
-            );
-          })}
-        </div>
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonhandler}
+          changed={this.nameChangedHandler}
+        />
       );
-      style.backgroundColor = "red";
     }
+
     //what we return to the Dom after all the logic
     return (
       <div className="App">
-        <h1>Hi its React</h1>
-        <button style={style} onClick={this.togglePersonsHandler}>
-          {" "}
-          Toggle Persons
-        </button>
+        <Cockpit
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler}
+        />
+
         {persons}
       </div>
     );
